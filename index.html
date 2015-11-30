@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Photo gallery</title>
+    <script type="text/javascript">
+        function ajax_get_gallery(folder) {
+            var thumbnailBox = document.getElementById("thumbnailBox");
+            var pictureFrame = document.getElementById("pictureFrame");
+            var hr = new XMLHttpRequest();
+            hr.open("POST", "json_gallery_data.php", true);
+            hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            hr.onreadystatechange = function () {
+                if (hr.readyState == 4 && hr.status == 200) {
+                    console.log(hr.responseText);
+                    var data = JSON.parse(hr.responseText);
+                    thumbnailBox.innerHTML = "";
+                    for (var obj in data) {
+                        if (data[obj].src) {
+                            thumbnailBox.innerHTML +=
+                                    '<div onclick="putInFrame(\'' + data[obj].src + '\')"><img src="' + data[obj].src + '"></div>';
+                        }
+                        ;
+                        pictureFrame.innerHTML = "<img src='" + data.img1.src + "'>"
+                    }
+                    ;
+                }
+                ;
+            };
+            hr.send("folder=" + folder);
+            thumbnailBox.innerHTML = "waiting for response";
+        }
+        function putInFrame(src) {
+            var pictureFrame = document.getElementById("pictureFrame");
+            pictureFrame.innerHTML = '<img src="' + src + '">';
+        }
+    </script>
+    <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+<div id="pageTop"> Dynamic JSON Ajax PHP Driven Image Gallery</div>
+<div id="thumbnailBox"> Thumbnailbox</div>
+<div id="pictureFrame"> pictureframe</div>
+
+<!--put your photos into directory 'gallery' in the same directory as this file-->
+<script type="text/javascript">ajax_get_gallery('gallery')</script>
+</body>
+</html>

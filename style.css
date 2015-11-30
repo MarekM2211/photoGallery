@@ -1,0 +1,41 @@
+body{
+    background-color: #000000;
+    margin: 0;
+    color: #bbbbbb;
+}
+#pageTop{
+    position: fixed;
+    background-color: #333333;
+    padding: 20px;
+    font-size: 36px;
+    width: 100%;
+    border-bottom: black 1px solid;
+    text-align: center;
+}
+#thumbnailBox{
+    float: left;
+    margin-top: 82px;
+    width: 120px;
+    background-color: #303030;
+}
+#thumbnailBox > div{
+    width: 100px;
+    height: 80px;
+    overflow: hidden;
+    margin: 10px;
+    cursor: pointer;
+}
+#thumbnailBox > div > img{
+    width: 100px;
+}
+
+#pictureFrame{
+    position: fixed;
+    left: 140px;
+    top: 100px;
+    width: 900px;
+    height: 800px;
+}
+#pictureFrame > img {
+    width: 100%;
+}
